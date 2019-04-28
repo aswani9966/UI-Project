@@ -1,0 +1,14 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div style="text-align:center">
+	<div *ngIf="router.url != '/login'">
+	  <span style="margin:0 auto;"><h2>
+	    Full Stack
+	  </h2></span>
+	  <a style="float:right" [routerLink]="" (click)="gotoLogin()">Logout</a>
+	</div>
+  <router-outlet></router-outlet>
+</div>
+<!--<s2w-angular-d3-tree-lib
+  [(treeData)]="data"
+  (onNodeChanged)="nodeUpdated($event)"
+  (onNodeSelected)="nodeSelected($event)"></s2w-angular-d3-tree-lib>-->

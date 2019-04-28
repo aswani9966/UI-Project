@@ -1,0 +1,32 @@
+<div >
+    <a [routerLink]="" (click)="gotoMetaData()">Home</a>
+  <button  class="btn btn-success" (click)="openModal('custom-modal-1')">
+	  <span class="glyphicon glyphicon-plus"></span> Add/Edit Row
+	</button>
+	<button class="btn btn-danger" (click)="onRemoveSelected()">
+	  <span class="glyphicon glyphicon-trash"></span> Delete Selected
+	</button>
+<br/>
+<div >
+<ag-grid-angular style="height: 450px; width:605px;display:inline-block;" [style.display]="gridDisplay?'inline-block':'none'" class="ag-theme-blue" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [paginationAutoPageSize]="true" [gridOptions]="gridOptions" [animateRows]="true" [rowSelection]="rowSelection"  (gridReady)="onGridReady($event)" enableColResize enableSorting enableFilter (cellValueChanged)="onCellValueChanged($event)" (rowDoubleClicked)="departmentedit($event,'custom-modal-1')"></ag-grid-angular>
+</div>
+</div>
+
+<modal id="custom-modal-1" style="position: absolute;left: 40%;">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>New Department</h1>
+            <p>
+                Name: <input type="text" [(ngModel)]="departmentName" /><br/>
+                Location<select [(ngModel)]="selectedLocationValue">
+                	 <option *ngFor="let location of locationsData" [(ngValue)]="location.id">
+				            {{location.description}}
+				      </option>
+                </select>
+            </p>
+            <button (click)="saveNewDepartment('custom-modal-1');">Save</button>
+            <button (click)="closeModal('custom-modal-1');">Back</button>
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>

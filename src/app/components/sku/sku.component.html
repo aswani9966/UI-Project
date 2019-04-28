@@ -1,0 +1,70 @@
+<div style="margin:0 auto;width:1000px;">
+    <a [routerLink]="" (click)="gotoMetaData()" style="float:left;">Home</a>
+    <div style="float:right;">
+  <button  class="btn btn-success" (click)="openModal('custom-modal-4')" >
+	  <span class="glyphicon glyphicon-plus"></span> Add/Edit Row
+	</button>
+	<button class="btn btn-danger" (click)="onRemoveSelected()">
+	  <span class="glyphicon glyphicon-trash"></span> Delete Selected
+	</button>
+</div>
+</div>
+<div >
+<ag-grid-angular style="height: 450px; width:1205px;display:inline-block;" [style.display]="gridDisplay?'inline-block':'none'" class="ag-theme-blue" [rowData]="rowData" [columnDefs]="columnDefs" [pagination]="true" [paginationAutoPageSize]="true" [gridOptions]="gridOptions" [animateRows]="true" [rowSelection]="rowSelection"  (gridReady)="onGridReady($event)" enableColResize enableSorting enableFilter (cellValueChanged)="onCellValueChanged($event)" (rowDoubleClicked)="subCategoryEdit($event,'custom-modal-4')"></ag-grid-angular>
+</div>
+
+<modal id="custom-modal-4" style="position: absolute;left: 40%;">
+    <div class="modal">
+        <div class="modal-body">
+            <h1>New/Edit SKU</h1>
+            <table>
+            	<tr>
+	            	<td>Name:</td>
+	                <td><input type="text" [(ngModel)]="skuName" /></td>
+            	</tr>
+            	<tr>
+                	<td>Location:</td>
+                	<td><select [(ngModel)]="selectedLocationValue">
+                	 <option *ngFor="let location of locationsData" [(ngValue)]="location.id">
+				            {{location.description}}
+				      </option>
+                	</select></td>
+            	</tr>
+                <tr>
+                	<td>Department:</td>
+                	<td><select [(ngModel)]="selectedDepartmentValue">
+                	 <option *ngFor="let department of departmentsData" [(ngValue)]="department.id">
+				            {{department.description}}
+				      </option>
+              		  </select></td>
+            	</tr>
+                <tr>
+                	<td>Category</td>
+                	<td>
+                		<select [(ngModel)]="selectedCategoryValue">
+	                	 <option *ngFor="let category of categoriesData" [(ngValue)]="category.id">
+					            {{category.description}}
+					      </option>
+	                	</select>
+                	</td>
+            	</tr>
+            	<tr>
+            		<td>Sub Category</td>
+                	<td><select [(ngModel)]="selectedSubCategoryValue">
+                	 <option *ngFor="let subCategory of subCategoriesData" [(ngValue)]="subCategory.id">
+				            {{subCategory.description}}
+				      </option>
+                	</select>
+            		</td>
+            	</tr>	
+        		<tr>
+            		<td><button (click)="saveNewCategory('custom-modal-4');">Save</button></td>
+            		<td><button (click)="closeModal('custom-modal-4');">Back</button></td>
+        		</tr>            	
+            </table>
+            
+            
+        </div>
+    </div>
+    <div class="modal-background"></div>
+</modal>
